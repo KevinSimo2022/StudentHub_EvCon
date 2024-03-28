@@ -62,7 +62,7 @@ const Home = () => {
       <div>
         <img src="/photoImg1.svg" alt="img" />
         <h1 style={{ fontWeight: "bold", fontSize: "35px" }}>
-          Welcome to Meetup!!!
+          Welcome to StudHub EventCon!!!
         </h1>
       </div>
       <div style={{ display: "flex", gap: "3rem", padding: "5rem" }}>

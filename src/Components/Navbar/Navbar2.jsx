@@ -25,6 +25,7 @@ display:flex;
 justify-content:space-between;
 padding:14px;
 background-color:white;
+height 100px;
 `
 
 const IconImage = styled.img`
@@ -93,22 +94,16 @@ export default function Navbar2() {
            
             <logoCont>
                 <Link to="/home">
-                <img  src="./logo.svg" alt="logo-img" style={{marginRight:"30px"}}  />
-
+                <img  src="./logo.svg" alt="logo-img" style={{marginRight:"30px", marginBottom:"40px"}}  />
                 </Link>
+
                 
-            <TextField id="outlined-basic" value={keyword} onChange={(e)=>setKeyword(e.target.value)} label="Search for keywords" variant="outlined" />
-            <TextField value={location} onChange={(e)=>setLocation(e.target.value)} id="outlined-basic" label="City or zip code" variant="outlined" />
-          <button onClick={handleSearch} style={{backgroundColor:"tomato",border:"none",borderTopRightRadius:"5px",borderBottomRightRadius:"5px"}}>  <IconImage
-          src="https://cdn-icons-png.flaticon.com/512/6583/6583229.png"
-          alt="icon"
-          ByteLengthQueuingStrategy
-        /></button>
+            
             </logoCont>
+            <div className={styles.linkDiv2}>
             <div className="startGroup">
                 <Link className={styles.grouplink} to="/createGroup">Start a new group - 30% off!</Link>
            </div>
-            <div className={styles.linkDiv2}>
                 <div style={{marginleft: 10,fontSize:"20px"}}>
                     <ChatBubbleOutlineIcon/>
                 </div>
@@ -141,7 +136,7 @@ export default function Navbar2() {
                         <MenuItem onClick={handleClose}><Link className={styles.menulink} to='/yourevents'>SavedEvents</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link className={styles.menulink} to='/yourgroups'>Your Groups</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link className={styles.menulink} to='/upcomingEvents'>Upcoming Events</Link></MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}><Link className={styles.menulink} to='/'>Logout</Link></MenuItem>
       </Menu>
     </div>
 
