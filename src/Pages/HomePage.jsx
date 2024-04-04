@@ -225,24 +225,7 @@ const Home = () => {
       <div className={styles.nextSec}>
         <NextEvent />
 
-        <div className={styles.next2}>
-          <h1>Check out what’s happening:</h1>
 
-          <div className={styles.tealcont}>
-
-            <TealButton label="Today" />
-
-            <TealButton label="Tommorow" />
-
-            <TealButton label="This Week" />
-
-            <TealButton label="Online" />
-
-            <TealButton label="In Person" />
-
-            <TealButton label="Trending Near you" />
-          </div>
-        </div>
       </div>
 
       {
