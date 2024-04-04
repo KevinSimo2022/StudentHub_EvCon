@@ -5,9 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styles from "./navbar.module.css";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
-import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
@@ -16,28 +14,18 @@ import IconButton from "@mui/material/IconButton";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import AppleIcon from "@mui/icons-material/Apple";
-import { fetchUserData } from "./fetchUserData";
-import { ClipLoader, BeatLoader } from "react-spinners";
-import { useDispatch, useSelector } from "react-redux";
-import { css } from "@emotion/react";
-import {
-  loginFailure,
-  loginRequest,
-  loginSuccess,
-  verifyLogin,
-  wrongCredentials
-} from "../../redux/auth/action";
+import { UserAuth } from '../../redux/auth/context/AuthContext';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const style = {
   position: "absolute",
   top: "42%",
-
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-
   overflowY: "scroll",
-  height: "570px",
+  height: "450px",
   bgcolor: "background.paper",
   border: "1px solid #000",
   borderRadius: "45px",
@@ -49,45 +37,32 @@ export default function BasicModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [state, handleState] = React.useState(false);
   const [email, setEmail] = React.useState("");
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const history = useHistory();
+  const { signIn } = UserAuth();
 
-  const [values, setValues] = React.useState({
-    password: "",
-
-    email: email,
-    showPassword: false
-  });
-
-  const { isAuth, isLoading, isError } = useSelector((state) => state.auth);
-  console.log("auth", isAuth, isLoading, isError);
-  const dispatch = useDispatch();
-  let pass=values.password
-  const handleLogin = () => {
-   dispatch(verifyLogin({email,pass}))
-   
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      if (!email || !password) {
+        throw new Error('Email and password are required.');
+      }
+      await signIn(email, password);
+      history.push('/home');
+    } catch (e) {
+      setError(e.message);
+      console.error(e);
+    }
   };
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword
-    });
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-  `;
 
   return (
     <div>
@@ -100,27 +75,16 @@ export default function BasicModal() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        onSubmit={handleSubmit}
       >
         <Box sx={style}>
-          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-            
-          </Typography> */}
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <div className={styles.logincont}>
-              <div className={styles.loginimgcont}>
-              <img src="./logo.svg" alt="logo-img" />
-              </div>
               <h2 className={styles.loginh1}>Log in</h2>
               <p className="styles loginp">
                 Not a Member yet ? <a href="">Sign Up</a>
               </p>
             </div>
-            <ClipLoader
-              css={override}
-              color="red"
-              loading={isLoading}
-              size={50}
-            />
             <Typography
               sx={{ marginLeft: "40px", fontWeight: "550", fontSize: "16px" }}
               variant="h6"
@@ -147,18 +111,18 @@ export default function BasicModal() {
               <OutlinedInput
                 size="small"
                 id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
+                      onClick={togglePasswordVisibility}
+                      onMouseDown={(e) => e.preventDefault()}
                       edge="end"
                     >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -175,30 +139,17 @@ export default function BasicModal() {
                 marginLeft: "40px"
               }}
               variant="contained"
-              onClick={handleLogin}
+              onClick={handleSubmit}
             >
               Log in
             </Button>
+            {error && (
+              <Typography sx={{ color: "red", marginLeft: "40px" }}>
+                {error}
+              </Typography>
+            )}
           </Typography>
 
-          <div className={styles.loginhr}>
-            <hr />
-            Or
-            <hr />
-          </div>
-
-          <div className={styles.loginsocial}>
-            <FacebookIcon />
-            Login With Facebook
-          </div>
-          <div className={styles.loginsocial}>
-            <GoogleIcon sx={{ marginLeft: "-10px" }} />
-            Login With Google
-          </div>
-          <div className={styles.loginsocial}>
-            <AppleIcon sx={{ marginLeft: "-15px" }} fontSize="large" />
-            Login With Apple
-          </div>
         </Box>
       </Modal>
     </div>
