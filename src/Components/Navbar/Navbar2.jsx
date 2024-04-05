@@ -102,15 +102,8 @@ export default function Navbar2() {
             </logoCont>
             <div className={styles.linkDiv2}>
             <div className="startGroup">
-                <Link className={styles.grouplink} to="/createGroup">Start a new group - 30% off!</Link>
+                <Link className={styles.grouplink} to="/createGroup">Start a new event !</Link>
            </div>
-                <div style={{marginleft: 10,fontSize:"20px"}}>
-                    <ChatBubbleOutlineIcon/>
-                </div>
-            
-                <div style={{marginleft: 10,fontSize:"20px"}}>
-                    <NotificationsNoneIcon sx={{fontSize:'28px'}}/>
-               </div>
                    
                
 
@@ -134,7 +127,7 @@ export default function Navbar2() {
         }}
       >
                         <MenuItem onClick={handleClose}><Link className={styles.menulink} to='/yourevents'>SavedEvents</Link></MenuItem>
-        <MenuItem onClick={handleClose}><Link className={styles.menulink} to='/yourgroups'>Your Groups</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link className={styles.menulink} to='/yourgroups'>Your Created Events</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link className={styles.menulink} to='/upcomingEvents'>Upcoming Events</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link className={styles.menulink} to='/'>Logout</Link></MenuItem>
       </Menu>

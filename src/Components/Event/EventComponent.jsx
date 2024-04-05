@@ -34,7 +34,7 @@ function EventComponent({
         <p className={styles.p1}>{date}</p>
         <p className={styles.p2}>{event_name}</p>
         <p className={styles.p3}>
-          {event_mode} • {event_place}, IN
+          {event_mode} • {event_place}, RW
         </p>
         <p className={styles.p4}>
           <div>{attendees} attendees</div>

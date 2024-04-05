@@ -23,22 +23,10 @@ function Event() {
     "Art & Culture",
     "Career & Business",
     "Community & Environment",
-    "Dancing",
-    "Games",
-    "Health & Wellbeing",
-    "Hobbies & Passions",
-    "Identity & Language",
     "Movements & Politics",
-    "Music",
-    "Parents & Family",
-    "Pets & Animals",
     "Religion & Spirituality",
     "Science & Education",
-    "Social Activities",
-    "Sports & Fitness",
-    "Support & Coaching",
     "Technology",
-    "Travel & Outdoor",
     "Writing"
   ];
 

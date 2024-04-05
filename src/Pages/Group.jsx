@@ -10,7 +10,7 @@ export default function Group() {
         <div>
            {
                     name && <div style={{marginBottom : "60px"}}>
-                    <h3>Your Created Groups will show here.</h3>
+                    <h3>Your Created Events will show here.</h3>
     
                     <div style={{backgroundColor:"white",display:"flex",padding:"1rem",margin:"20px",width:"50%",margin:"auto",borderRadius:"20px"}}>
                         <div style={{marginTop:"20px"}}>
