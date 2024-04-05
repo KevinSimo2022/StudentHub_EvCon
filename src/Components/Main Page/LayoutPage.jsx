@@ -51,7 +51,14 @@ return <Redirect to="/home"/>
                 </div>
             </section>
             
+           
+          
+            <div className={styles.nextSec}>
 
+
+
+
+            </div>
             {/* {bookmarks.length > 0 && <h1>Saved Events</h1>}
       {bookmarks.length > 0 &&
         bookmarks.map(
